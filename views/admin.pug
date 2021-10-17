@@ -23,7 +23,7 @@ block content
 
         each user in users
             tr
-                form.no-margin(action="/update/"+user.id, method="POST")
+                form.no-margin(action="/update/"+user.id, method="POST", onsubmit='return update_confirmation();')
                     td.text-left
                         select(name="type" )
                             option(selected=(user.type === "Student"))

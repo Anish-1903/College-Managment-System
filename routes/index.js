@@ -97,7 +97,7 @@ router.post('/update/:id', function(req, res) {
                     res.status(404).send({
                         message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found!`
                     });
-                } else res.send({ message: "Tutorial was updated successfully." });
+                } else res.redirect("/profile")
             })
             .catch(err => {
                 res.status(500).send({
