@@ -1,0 +1,51 @@
+extends layout
+
+block content
+    script.
+        function delete_confirmation() {
+            return confirm('Are you sure you want to delete the user?');
+        }
+        function update_confirmation() {
+            return confirm('Are you sure you want to update the user?');
+        }
+    .table-title
+        h3 Data Table
+    table.table-fill
+        thead
+            tr
+                th.text-left UserType
+                th.text-left Name
+                th.text-left Email
+                th.text-left Gender
+                th.text-left Action
+                th.text-left Action
+        tbody.table-hover
+
+        each user in users
+            tr
+                form.no-margin(action="/update/"+user.id, method="POST")
+                    td.text-left
+                        select(name="type" )
+                            option(selected=(user.type === "Student"))
+                                | Student
+                            option(selected=(user.type === "Faculty"))
+                                | Faculty
+                            option(selected=(user.type === "Admin"))
+                                | Admin
+                    td.text-left
+                        input(type='text' name='fullName' value=user.fullName)
+                    td.text-left
+                        input(type='text' name='username' value=user.username)
+                    td.text-left
+                        select(name="gender")
+                            option(selected=(user.gender === "Male"))
+                                | Male
+                            option(selected=(user.gender === "Female"))
+                                | Female
+                    td.text-left
+                        input(type="hidden" name="id" value=user.id)
+                        input(type="submit" class="btn btn-info" value="Update")
+                td.text-left
+                    form.no-margin(action="/delete", onsubmit='return delete_confirmation();')
+                        input(type="hidden" name="id" value=user.id)
+                        input(type="submit" class="btn btn-danger" value="Delete")

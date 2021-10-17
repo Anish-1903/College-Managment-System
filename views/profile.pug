@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    form(action="/update/"+user.id, method="post")
+        div
+            label Type
+            select(name="type" disabled=true )
+                option(selected=(user.type === "Student"))
+                    | Student
+                option(selected=(user.type === "Faculty"))
+                    | Faculty
+
+        div
+            label Full Name
+            input(type="text", name="fullName" value=user.fullName)
+        div
+            label Gender
+            select(name="gender")
+                option(selected=(user.gender === "Male"))
+                    | Male
+                option(selected=(user.gender === "Female"))
+                    | Female
+
+        div
+            input(type="submit" class="btn btn-info" value="Update")
+
